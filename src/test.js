@@ -1,19 +1,19 @@
-function countCats(mtx) {
-    let counter = 0
+function createDreamTeam(arr) {
+    let name = new Array()
   
-    function check (arr) {
+    if  (typeof arr === 'object' && arr !== null && arguments.length>0 ) {
       arr.forEach(el => {
-        if  (typeof el === 'object'){
-          check(el)
-        }
-        else {
-            if (el === '^^') counter++
+        if (typeof el === 'string') {
+          el = el.trim()
+          name.push(el[0].toUpperCase())
         }
       })
     }
-    
-    check(mtx)
-    console.log(counter);
-  }
+  
+    if (name.length) {
+      return name.sort().join('')}
+    return name.length>0
+}
+  
 
-  countCats([[0, 1, '^^'],[0, '^^', 2],  ['^^', 1, 2, [0, '^^', 2, [0, 1, '^^']]]]) 
+  console.log(createDreamTeam())
