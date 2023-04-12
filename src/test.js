@@ -1,19 +1,22 @@
-function createDreamTeam(arr) {
-    let name = new Array()
-  
-    if  (typeof arr === 'object' && arr !== null && arguments.length>0 ) {
-      arr.forEach(el => {
-        if (typeof el === 'string') {
-          el = el.trim()
-          name.push(el[0].toUpperCase())
-        }
-      })
+function getSeason(date) {
+    if (!date) {
+        return 'Unable to determine the time of year!';
     }
-  
-    if (name.length) {
-      return name.sort().join('')}
-    return name.length>0
-}
-  
+    if (Object.prototype.toString.call(date) !== "[object Date]" || isNaN(date)) {
+      throw new Error('Invalid date!')
+    }
+    let month = date.getMonth();
 
-  console.log(createDreamTeam())
+    if (month > 1 && month <= 4) {
+        return 'spring'
+    }
+    else if (month > 4 && month <= 7) {
+        return 'summer'
+    }
+    else if (month > 7 && month <= 10) {
+        return 'autumn'
+    }
+    else {
+        return 'winter'
+  }
+}
