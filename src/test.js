@@ -1,22 +1,18 @@
-function getSeason(date) {
-    if (!date) {
-        return 'Unable to determine the time of year!';
-    }
-    if (Object.prototype.toString.call(date) !== "[object Date]" || isNaN(date)) {
-      throw new Error('Invalid date!')
-    }
-    let month = date.getMonth();
-
-    if (month > 1 && month <= 4) {
-        return 'spring'
-    }
-    else if (month > 4 && month <= 7) {
-        return 'summer'
-    }
-    else if (month > 7 && month <= 10) {
-        return 'autumn'
-    }
-    else {
-        return 'winter'
+function calculateHanoi(disksNumber, turnsSpeed ) {
+  let turns = 0 
+  function move(disksNumber, fromRod, toRod, withRod) {
+  if (disksNumber >=1) {
+    move(disksNumber - 1, fromRod, withRod, toRod);
+    turns++
+    move(disksNumber - 1, withRod, toRod, fromRod);
   }
 }
+move(disksNumber, "x", "y", "z");
+
+let temp = String(turns)
+
+return {turns, seconds: Math.floor( temp / (turnsSpeed / 3600))}
+
+}
+
+console.log( calculateHanoi(5, 4308))
