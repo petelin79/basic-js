@@ -1,18 +1,11 @@
-function calculateHanoi(disksNumber, turnsSpeed ) {
-  let turns = 0 
-  function move(disksNumber, fromRod, toRod, withRod) {
-  if (disksNumber >=1) {
-    move(disksNumber - 1, fromRod, withRod, toRod);
-    turns++
-    move(disksNumber - 1, withRod, toRod, fromRod);
-  }
-}
-move(disksNumber, "x", "y", "z");
-
-let temp = String(turns)
-
-return {turns, seconds: Math.floor( temp / (turnsSpeed / 3600))}
-
+function deleteDigit(num) {
+  let max = -Math.abs(num)
+  let arr = String(num).split('')
+  arr.forEach((el,key) => {
+    let t = arr.slice(0,key).concat(arr.slice(key+1,arr.length)).join('')
+    t > max ? max = t : undefined
+  })
+  return max
 }
 
-console.log( calculateHanoi(5, 4308))
+console.log( deleteDigit(342))
