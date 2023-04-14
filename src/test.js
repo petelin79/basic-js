@@ -1,38 +1,22 @@
 
-const chainMaker = {
-  arr: new Array(),
-  getLength() {
-   return this.arr.length
-  },
-  addLink(value) {
-    if (value !== undefined) {
-      this.arr.push(`( ${value} )`)
-    }
-    else {
-      this.arr.push(`( )`)
-    }
-    return this
-  },
-  removeLink(pos) {
-    if (typeof pos === 'number' && pos>this.arr.length) {
-      this.arr.splice(pos-1, 1);
-    }
-    else{
-      this.arr = []
-      throw new Error("You can't remove incorrect link!")
-    }
-    return this
-  },
-  reverseChain() {
-    this.arr.reverse();
-    return this
-  },
-  finishChain() {
-    let res = this.arr.join('~~');
-    this.arr = [];
-    return res;
-  }
-};
+class DepthCalculator {
+  calculateDepth(arr) {
+    let depth = 1
 
-console.log(chainMaker.addLink(3));
-console.log(chainMaker.getLength());
+    for (let i = 0; i < arr.length; i++) {
+      if (Array.isArray(arr[i])) {
+        const elementDepth = this.calculateDepth(arr[i]) + 1;
+        depth = Math.max(depth, elementDepth);
+      }
+    }
+    return depth;
+  }
+}
+
+const depthCalc = new DepthCalculator();
+
+// console.log( depthCalc.calculateDepth([1, 2, 3, 4, 5]))
+
+console.log( depthCalc.calculateDepth([1, 2, 3, [1,[[[]]]], 4, 5, [1]]))
+
+// console.log( depthCalc.calculateDepth([[[]]]) )
