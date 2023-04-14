@@ -1,35 +1,22 @@
-function getCommonCharacterCount(s1, s2) {
-  const func = (str) => {
-    let obj = new Object()
-    for (let i=0; i<str.length; i++){
-      if (!Object.keys(obj).includes(str[i])) {
-        obj[str[i]] = 1
-      }
-      else {
-        obj[str[i]]++
-      }
-    }
-    return obj
-  }
-
-  let a = func(s1)
-  let b = func(s2)
-
-  let counter = 0
-
-  Object.entries(a).forEach(el => {
-    Object.entries(b).forEach(elem=>{
-        if (el[0] === elem[0]){
-          counter += Math.min(el[1],elem[1])
-        }
+function getDNSStats(domains) {
+  let arr = []
+  for (let i = 0; i<domains.length; i++) {
+    let t = domains[i].split('.').reverse()
+    t.forEach(elem => {
+      elem = '.'+elem
     })
-
-  })
-  return counter
+    t=t.map((el,key) => '.'+t.slice(0, key + 1).join('.'))
+    arr.push(t)
+  }
+  let obj = {};
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr[i].length; j++) {
+      if(!obj[arr[i][j]]) obj[arr[i][j]] = 1;
+      else obj[arr[i][j]]++
+    }
+  }
+  return obj
 
 }
 
-
-
-
-console.log( getCommonCharacterCount('aabcc', 'adcaa'))
+console.log( getDNSStats(['code.yandex.ru', 'music.yandex.ru', 'yandex.ru']))
