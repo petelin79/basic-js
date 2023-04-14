@@ -35,8 +35,12 @@ function getDNSStats(domains) {
   let obj={};
   for (let i=0; i<arr.length; i++) {
     for (let j =0; j<arr[i].length; j++) {
-      if(!obj[arr[i][j]]) obj[arr[i][j]] = 1;
-      else obj[arr[i][j]]++
+      if(!obj[arr[i][j]]) {
+        obj[arr[i][j]] = 1
+      }
+      else {
+        obj[arr[i][j]]++
+      }
     }
   }
   return obj
