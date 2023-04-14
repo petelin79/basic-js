@@ -18,13 +18,10 @@ const HALF_LIFE_PERIOD = 5730;
  *
  */
 function dateSample(data) {
-  if (typeof data !== 'string' ||  data <= 0 || data > MODERN_ACTIVITY || isNaN(data)) {
-    
-    return false;
+  if (typeof data!=='string'||data <= 0||data>MODERN_ACTIVITY||isNaN(data)) {
+    return false
   }
-
-  let res = Math.ceil(Math.log(MODERN_ACTIVITY / data) / (0.693 / HALF_LIFE_PERIOD))
-  
+  let res = Math.ceil(Math.log(MODERN_ACTIVITY/data)/(0.693/HALF_LIFE_PERIOD))
   return res
 }
 

@@ -14,7 +14,7 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function createDreamTeam(arr) {
-  if(!arr || !arr.length) return false
+  if(!arr||!arr.length) return false
   let name = new Array()
 
   arr.forEach(el => {
