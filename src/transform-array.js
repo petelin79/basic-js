@@ -14,33 +14,37 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
 function transform(arr) {
-  const res = []
-  if (!Array.isArray(arr)) {
-    throw new Error ("'arr' parameter must be an instance of the Array!")
-  }
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === '--discard-next' && i + 1 <= arr.length) {
-      i++
-    } else if (arr[i] === '--discard-prev') {
-      if (res.length > 0) {
-        res.pop()
-      }
-    } else if (arr[i] === '--double-prev') {
-      if (i > 0) {
-        res.push(arr[i-1])
-      }
+    if (!Array.isArray(arr)) {
+      throw Error ("'arr' parameter must be an instance of the Array!");
     }
-    else if (arr[i] === '--double-next' && i + 1 <= arr.length) {
-      if (i < arr.length - 1) {
-        res.push(arr[i+1])
-      }
-    } else {
-      res.push(arr[i])
-    }
-  }
 
-  return res;
-}
+    const res = new Array;
+    for (let n = 0; n < arr.length; n += 1) {
+      switch (arr[n]) {
+        case '--discard-prev':
+        if (arr[n - 2] !== '--discard-next') {
+            res.pop();
+        }
+        break;
+        case '--discard-next':
+          n += 1;
+          break;
+        case '--double-prev': 
+        if (arr[n - 2] !== '--discard-next' && arr[n - 1] !== undefined) {
+            res.push(arr[n - 1]);
+        }
+        break;
+        case '--double-next': 
+          if (arr[n + 1] !== undefined) {
+            res.push(arr[n + 1]);
+          }
+          break;
+        default:
+            res.push(arr[n]);
+      }
+    }
+    return res;
+  }
 
 module.exports = {
   transform
